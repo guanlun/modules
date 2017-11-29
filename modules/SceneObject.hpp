@@ -10,14 +10,26 @@
 #define SceneObject_hpp
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
 
 class SceneObject {
 public:
-    SceneObject(const GLfloat vertexData[]);
+    SceneObject(const GLfloat vertexData[], int vertexDataSize);
     
     inline GLuint getVertexBuffer() const { return vertexBuffer; };
+    inline GLuint getShaderProgramID() const { return shaderProgramID; };
+    
+    void loadShaders(const char* vertShaderPath, const char* fragShaderPath);
+    
 protected:
     GLuint vertexBuffer;
+    GLuint shaderProgramID;
 };
 
 #endif /* SceneObject_hpp */
