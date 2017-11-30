@@ -12,6 +12,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -22,6 +23,7 @@ class SceneObject {
 public:
     SceneObject(const GLfloat vertexData[], int vertexDataSize);
     
+    inline glm::mat4 getModelMatrix() const { return modelMatrix; };
     inline GLuint getVertexBuffer() const { return vertexBuffer; };
     inline GLuint getShaderProgramID() const { return shaderProgramID; };
     
@@ -30,6 +32,8 @@ public:
 protected:
     GLuint vertexBuffer;
     GLuint shaderProgramID;
+    
+    glm::mat4 modelMatrix;
 };
 
 #endif /* SceneObject_hpp */

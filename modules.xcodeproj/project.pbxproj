@@ -14,6 +14,7 @@
 		D95CAAC31FC9F74300EECC7D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95CAAC21FC9F74300EECC7D /* CoreVideo.framework */; };
 		D95CAACA1FCD221200EECC7D /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAC81FCD221200EECC7D /* SceneObject.cpp */; };
 		D95CAACC1FCE589A00EECC7D /* glm.pc in Frameworks */ = {isa = PBXBuildFile; fileRef = D95CAACB1FCE589A00EECC7D /* glm.pc */; };
+		D95CAACF1FCFBCF600EECC7D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAACD1FCFBCF600EECC7D /* Camera.cpp */; };
 		D9DF5EB41FC67E3E00D336AF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DF5EB31FC67E3E00D336AF /* main.cpp */; };
 		D9DF5EBC1FC6885A00D336AF /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9DF5EBB1FC6885A00D336AF /* GLUT.framework */; };
 		D9DF5EBE1FC6885E00D336AF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9DF5EBD1FC6885E00D336AF /* OpenGL.framework */; };
@@ -44,6 +45,8 @@
 		D95CAAC81FCD221200EECC7D /* SceneObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneObject.cpp; sourceTree = "<group>"; };
 		D95CAAC91FCD221200EECC7D /* SceneObject.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneObject.hpp; sourceTree = "<group>"; };
 		D95CAACB1FCE589A00EECC7D /* glm.pc */ = {isa = PBXFileReference; lastKnownFileType = text; name = glm.pc; path = ../../../../usr/local/lib/pkgconfig/glm.pc; sourceTree = "<group>"; };
+		D95CAACD1FCFBCF600EECC7D /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		D95CAACE1FCFBCF600EECC7D /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		D9DF5EB01FC67E3E00D336AF /* modules */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = modules; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9DF5EB31FC67E3E00D336AF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D9DF5EBB1FC6885A00D336AF /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -96,6 +99,8 @@
 				D9DF5EB31FC67E3E00D336AF /* main.cpp */,
 				D95CAAC81FCD221200EECC7D /* SceneObject.cpp */,
 				D95CAAC91FCD221200EECC7D /* SceneObject.hpp */,
+				D95CAACD1FCFBCF600EECC7D /* Camera.cpp */,
+				D95CAACE1FCFBCF600EECC7D /* Camera.hpp */,
 			);
 			path = modules;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9DF5EB41FC67E3E00D336AF /* main.cpp in Sources */,
+				D95CAACF1FCFBCF600EECC7D /* Camera.cpp in Sources */,
 				D95CAACA1FCD221200EECC7D /* SceneObject.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

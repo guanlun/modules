@@ -10,11 +10,12 @@
 
 
 SceneObject::SceneObject(const GLfloat vertexData[], int vertexDataSize) {
-
     glGenBuffers(1, &this->vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);
 
     glBufferData(GL_ARRAY_BUFFER, vertexDataSize, vertexData, GL_STATIC_DRAW);
+    
+    this->modelMatrix = glm::mat4(1.0f);
 }
 
 void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShaderPath) {

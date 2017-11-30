@@ -8,6 +8,18 @@
 GLFWwindow* window;
 
 #include "SceneObject.hpp"
+#include "Camera.hpp"
+
+Camera mainCam;
+
+void cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
+    // TODO: placeholder
+    
+    glm::mat4 viewMatrix = mainCam.getViewMatrix();
+    viewMatrix[0][0] += 0.01;
+    
+    mainCam.setViewMatrix(viewMatrix);
+}
 
 int main( void )
 {
@@ -35,6 +47,8 @@ int main( void )
     }
     glfwMakeContextCurrent(window);
     
+    glfwSetCursorPosCallback(window, cursorPosCallback);
+    
     // Initialize GLEW
     glewExperimental = true; // Needed for core profile
     if (glewInit() != GLEW_OK) {
@@ -49,16 +63,6 @@ int main( void )
     
     // Dark blue background
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-    
-    glm::mat4 projectionMtx = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
-    glm::mat4 viewMtx = glm::lookAt(
-        glm::vec3(4, 3, 3),
-        glm::vec3(0, 0, 0),
-        glm::vec3(0, 1, 0)
-    );
-    glm::mat4 modelMtx = glm::mat4(1.0f);
-    glm::mat4 mvp = projectionMtx * viewMtx * modelMtx;
-
     
     GLuint VertexArrayID;
     glGenVertexArrays(1, &VertexArrayID);
@@ -77,11 +81,15 @@ int main( void )
     sceneObjs.push_back(sceneObj);
     
     do {
+        glm::mat4 viewProjectionMatrix = mainCam.getViewProjectionMatrix();
+        
         // Clear the screen
         glClear( GL_COLOR_BUFFER_BIT );
         
         for (auto iter = sceneObjs.begin(); iter != sceneObjs.end(); iter++) {
             SceneObject obj = *iter;
+            
+            glm::mat4 mvp = viewProjectionMatrix * obj.getModelMatrix();
             
             GLuint shaderProgramID = obj.getShaderProgramID();
             GLuint vertexBuffer = obj.getVertexBuffer();
@@ -117,5 +125,4 @@ int main( void )
     
     return 0;
 }
-
 
