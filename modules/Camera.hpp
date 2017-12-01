@@ -14,14 +14,22 @@
 
 class Camera {
 public:
-    Camera();
+    Camera(glm::vec3 position);
     glm::mat4 getViewProjectionMatrix() const;
     
     inline glm::mat4 getViewMatrix() const { return this->viewMtx; };
     inline void setViewMatrix(const glm::mat4 viewMtx) { this->viewMtx = viewMtx; };
-private:
+    
+    void moveCamera(int direction);
+    
+protected:
+    void updateViewMatrix();
+    
     glm::mat4 projectionMtx;
     glm::mat4 viewMtx;
+    
+    glm::vec3 lookAtPos;
+    glm::vec3 cameraPos;
 };
 
 #endif /* Camera_hpp */

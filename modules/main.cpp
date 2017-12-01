@@ -10,15 +10,28 @@ GLFWwindow* window;
 #include "SceneObject.hpp"
 #include "Camera.hpp"
 
-Camera mainCam;
+Camera mainCam(glm::vec3(4, 3, 3));
 
-void cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
-    // TODO: placeholder
+double lastXPos = -1;
+double lastYPos = -1;
+
+void cursorPosCallback(GLFWwindow* window, double xPos, double yPos) {
+    if (lastXPos != -1 || lastYPos != -1) {
+        double deltaX = xPos - lastXPos;
+        double deltaY = yPos - lastYPos;
+        
+        glm::mat4 viewMatrix = mainCam.getViewMatrix();
+        viewMatrix[0][0] += 0.01;
+        
+        mainCam.setViewMatrix(viewMatrix);
+    }
     
-    glm::mat4 viewMatrix = mainCam.getViewMatrix();
-    viewMatrix[0][0] += 0.01;
-    
-    mainCam.setViewMatrix(viewMatrix);
+    lastXPos = xPos;
+    lastYPos = yPos;
+}
+
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    mainCam.moveCamera(key);
 }
 
 int main( void )
@@ -48,6 +61,7 @@ int main( void )
     glfwMakeContextCurrent(window);
     
     glfwSetCursorPosCallback(window, cursorPosCallback);
+    glfwSetKeyCallback(window, keyCallback);
     
     // Initialize GLEW
     glewExperimental = true; // Needed for core profile
