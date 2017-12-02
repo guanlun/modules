@@ -9,6 +9,7 @@ GLFWwindow* window;
 
 #include "SceneObject.hpp"
 #include "Camera.hpp"
+#include "ObjectLoader.hpp"
 
 Camera mainCam(glm::vec3(4, 3, 3));
 
@@ -81,6 +82,8 @@ int main( void )
     GLuint VertexArrayID;
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
+    
+    ObjectLoader::readObjectFile("/Users/guanlun/Workspace/modules/modules/data/diamond.obj");
     
     static const GLfloat vertexBufferData[] = {
         -1.0f, -1.0f, 0.0f,
