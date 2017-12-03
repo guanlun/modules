@@ -8,19 +8,33 @@
 
 #include "ObjectLoader.hpp"
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
+glm::vec3 parseVector(string vecStr) {
+    string segment;
+    stringstream segmentStream(vecStr);
+    
+    glm::vec3 vertexPos;
+    
+    int index = 0;
+    
+    while (getline(segmentStream, segment, ' ')) {
+        vertexPos[index++] = stod(segment);
+    }
+    
+    return vertexPos;
+}
 
-using namespace std;
-
-void ObjectLoader::readObjectFile(const char* filename) {
+vector<GLfloat> ObjectLoader::readObjectFile(const char* filename) {
+    vector<GLfloat> vertexBufferData;
+    
     ifstream objInput(filename);
     
     string objName;
     
     int vCount = 0, nCount = 0, tCount = 0;
-    int vOffset, nOffset, tOffset;
+    
+    vector<glm::vec3> vertexPositions;
+    vector<glm::vec3> vertexNormals;
+    vector<glm::vec3> vertexTexCoords;
 
     for (string line; getline(objInput, line); ) {
         stringstream ss(line);
@@ -28,18 +42,23 @@ void ObjectLoader::readObjectFile(const char* filename) {
         getline(ss, part, ' ');
         
         if (part == "o") {
-            vOffset = vCount;
-            nOffset = nCount;
-            tOffset = tCount;
-            
             getline(ss, part, '\n');
             objName = part + ".obj";
             
             printf("parsing: %s\n", part.c_str());
         } else if (part == "v") {
             vCount++;
+            
+            // "part" is the line excluding leading "v"
+            getline(ss, part, '\n');
+            
+            vertexPositions.push_back(parseVector(part));
+
         } else if (part == "vn") {
             nCount++;
+            
+            getline(ss, part, '\n');
+
         } else if (part == "vt") {
             tCount++;
         } else if (part == "f") {
@@ -47,48 +66,36 @@ void ObjectLoader::readObjectFile(const char* filename) {
             getline(ss, part, '\n');
             
             // each vSegment stands for a vertex in the format X/Y/Z
-            std::string vSegment;
+            string vSegment;
             
             // create a stringstream to handle "part", a series of vSegment
-            std::stringstream vStream(part);
+            stringstream vStream(part);
             
             // reset "line" to "f " and later add new face data to it
             line = "";
-            std::stringstream newFaceStream;
-            newFaceStream << "f ";
             
             while (getline(vStream, vSegment, ' ')) { // find all vertices of the face
-                std::string vStr, tStr, nStr;
+                string vStr = "", tStr = "", nStr = "";
                 
                 // a stringstream for each vertex data item X/Y/Z
-                std::stringstream segmentStream(vSegment);
+                stringstream segmentStream(vSegment);
                 
                 getline(segmentStream, vStr, '/');
                 getline(segmentStream, tStr, '/');
                 getline(segmentStream, nStr, '/');
                 
-                if (nStr.empty()) { // cannot find normal vector
-//                    throw "normal vector not supplied";
-                }
+                int vIndex = atoi(vStr.c_str()) - 1;
+//                int nIndex = atoi(nStr.c_str()) - 1;
+//                int tIndex = atoi(tStr.c_str()) - 1;
                 
-                int vIndex = atoi(vStr.c_str()) - vOffset;
-                int nIndex = atoi(nStr.c_str()) - nOffset;
-                int tIndex = -1;
+                glm::vec3 vertexPos = vertexPositions[vIndex];
                 
-                if (!tStr.empty()) { // texture coord provided
-                    tIndex = atoi(tStr.c_str()) - tOffset;
-                }
-                
-                newFaceStream << vIndex << '/';
-                if (tIndex != -1) { // texture coord provided
-                    newFaceStream << tIndex;
-                }
-                newFaceStream << '/';
-                newFaceStream << nIndex << ' ';
+                vertexBufferData.push_back(vertexPos[0]);
+                vertexBufferData.push_back(vertexPos[1]);
+                vertexBufferData.push_back(vertexPos[2]);
             }
-            
-            line = newFaceStream.str();
         }
-
     }
+    
+    return vertexBufferData;
 }

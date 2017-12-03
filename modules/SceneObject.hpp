@@ -26,10 +26,12 @@ public:
     inline glm::mat4 getModelMatrix() const { return modelMatrix; };
     inline GLuint getVertexBuffer() const { return vertexBuffer; };
     inline GLuint getShaderProgramID() const { return shaderProgramID; };
+    inline int getBufferSize() const { return bufferSize; };
     
     void loadShaders(const char* vertShaderPath, const char* fragShaderPath);
     
 protected:
+    int bufferSize;
     GLuint vertexBuffer;
     GLuint shaderProgramID;
     

@@ -15,6 +15,7 @@ SceneObject::SceneObject(const GLfloat vertexData[], int vertexDataSize) {
 
     glBufferData(GL_ARRAY_BUFFER, vertexDataSize, vertexData, GL_STATIC_DRAW);
     
+    this->bufferSize = vertexDataSize;
     this->modelMatrix = glm::mat4(1.0f);
 }
 

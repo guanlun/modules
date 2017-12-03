@@ -11,7 +11,7 @@ GLFWwindow* window;
 #include "Camera.hpp"
 #include "ObjectLoader.hpp"
 
-Camera mainCam(glm::vec3(4, 3, 3));
+Camera mainCam(glm::vec3(10, 10, 10));
 
 double lastXPos = -1;
 double lastYPos = -1;
@@ -79,19 +79,20 @@ int main( void )
     // Dark blue background
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
     
+    // Enable depth test
+//    glEnable(GL_DEPTH_TEST);
+    // Accept fragment if it closer to the camera than the former one
+//    glDepthFunc(GL_LESS);
+    
     GLuint VertexArrayID;
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
     
-    ObjectLoader::readObjectFile("/Users/guanlun/Workspace/modules/modules/data/diamond.obj");
+    vector<GLfloat> vertexBufferData = ObjectLoader::readObjectFile("/Users/guanlun/Workspace/modules/modules/data/teapot.obj");
     
-    static const GLfloat vertexBufferData[] = {
-        -1.0f, -1.0f, 0.0f,
-        1.0f, -1.0f, 0.0f,
-        0.0f,  1.0f, 0.0f,
-    };
-
-    SceneObject sceneObj(vertexBufferData, sizeof(vertexBufferData));
+    GLfloat* data = vertexBufferData.data();
+    
+    SceneObject sceneObj(vertexBufferData.data(), vertexBufferData.size());
     sceneObj.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
     
     vector<SceneObject> sceneObjs;
@@ -121,7 +122,7 @@ int main( void )
             glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
             
-            glDrawArrays(GL_TRIANGLES, 0, 3);
+            glDrawArrays(GL_TRIANGLES, 0, obj.getBufferSize());
             glDisableVertexAttribArray(0);
         }
         
