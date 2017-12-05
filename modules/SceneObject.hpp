@@ -21,7 +21,7 @@ using namespace std;
 
 class SceneObject {
 public:
-    SceneObject(const GLfloat vertexData[], int vertexDataSize);
+    SceneObject(vector<GLfloat> vertexData);
     
     inline glm::mat4 getModelMatrix() const { return modelMatrix; };
     inline GLuint getVertexBuffer() const { return vertexBuffer; };

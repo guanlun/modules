@@ -9,13 +9,15 @@
 #include "SceneObject.hpp"
 
 
-SceneObject::SceneObject(const GLfloat vertexData[], int vertexDataSize) {
+SceneObject::SceneObject(vector<GLfloat> vertexData) {
     glGenBuffers(1, &this->vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);
-
-    glBufferData(GL_ARRAY_BUFFER, vertexDataSize, vertexData, GL_STATIC_DRAW);
     
-    this->bufferSize = vertexDataSize;
+    unsigned long vertexDataLength = vertexData.size();
+
+    glBufferData(GL_ARRAY_BUFFER, vertexDataLength * sizeof(GLfloat), vertexData.data(), GL_STATIC_DRAW);
+    
+    this->bufferSize = (int)vertexDataLength;
     this->modelMatrix = glm::mat4(1.0f);
 }
 
@@ -66,8 +68,6 @@ void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShader
         glGetShaderInfoLog(vertexShaderID, InfoLogLength, NULL, &VertexShaderErrorMessage[0]);
         printf("%s\n", &VertexShaderErrorMessage[0]);
     }
-    
-    
     
     // Compile Fragment Shader
     printf("Compiling shader : %s\n", fragShaderPath);

@@ -80,19 +80,19 @@ int main( void )
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
     
     // Enable depth test
-//    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
-//    glDepthFunc(GL_LESS);
+    glDepthFunc(GL_LESS);
     
     GLuint VertexArrayID;
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
     
-    vector<GLfloat> vertexBufferData = ObjectLoader::readObjectFile("/Users/guanlun/Workspace/modules/modules/data/teapot.obj");
+    vector<GLfloat> vertexBufferData = ObjectLoader::readObjectFile("/Users/guanlun/Workspace/modules/modules/data/cube.obj");
     
     GLfloat* data = vertexBufferData.data();
     
-    SceneObject sceneObj(vertexBufferData.data(), vertexBufferData.size());
+    SceneObject sceneObj(vertexBufferData);
     sceneObj.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
     
     vector<SceneObject> sceneObjs;
@@ -102,7 +102,7 @@ int main( void )
         glm::mat4 viewProjectionMatrix = mainCam.getViewProjectionMatrix();
         
         // Clear the screen
-        glClear( GL_COLOR_BUFFER_BIT );
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         for (auto iter = sceneObjs.begin(); iter != sceneObjs.end(); iter++) {
             SceneObject obj = *iter;

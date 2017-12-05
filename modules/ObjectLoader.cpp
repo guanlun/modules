@@ -48,19 +48,20 @@ vector<GLfloat> ObjectLoader::readObjectFile(const char* filename) {
             printf("parsing: %s\n", part.c_str());
         } else if (part == "v") {
             vCount++;
-            
             // "part" is the line excluding leading "v"
             getline(ss, part, '\n');
-            
             vertexPositions.push_back(parseVector(part));
 
         } else if (part == "vn") {
             nCount++;
-            
             getline(ss, part, '\n');
+            vertexNormals.push_back(parseVector(part));
 
         } else if (part == "vt") {
             tCount++;
+            getline(ss, part, '\n');
+            vertexTexCoords.push_back(parseVector(part));
+            
         } else if (part == "f") {
             // "part" is the line excluding leading "f"
             getline(ss, part, '\n');
@@ -85,14 +86,17 @@ vector<GLfloat> ObjectLoader::readObjectFile(const char* filename) {
                 getline(segmentStream, nStr, '/');
                 
                 int vIndex = atoi(vStr.c_str()) - 1;
-//                int nIndex = atoi(nStr.c_str()) - 1;
-//                int tIndex = atoi(tStr.c_str()) - 1;
+                int tIndex = atoi(tStr.c_str()) - 1;
+                int nIndex = atoi(nStr.c_str()) - 1;
                 
                 glm::vec3 vertexPos = vertexPositions[vIndex];
                 
                 vertexBufferData.push_back(vertexPos[0]);
                 vertexBufferData.push_back(vertexPos[1]);
                 vertexBufferData.push_back(vertexPos[2]);
+                
+                glm::vec3 vertexNormal = vertexNormals[nIndex];
+                
             }
         }
     }
