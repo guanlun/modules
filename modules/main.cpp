@@ -9,7 +9,7 @@ GLFWwindow* window;
 
 #include "SceneObject.hpp"
 #include "Camera.hpp"
-#include "ObjectLoader.hpp"
+#include "ObjectData.hpp"
 
 Camera mainCam(glm::vec3(10, 10, 10));
 
@@ -88,11 +88,7 @@ int main( void )
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
     
-    vector<GLfloat> vertexBufferData = ObjectLoader::readObjectFile("/Users/guanlun/Workspace/modules/modules/data/cube.obj");
-    
-    GLfloat* data = vertexBufferData.data();
-    
-    SceneObject sceneObj(vertexBufferData);
+    SceneObject sceneObj(ObjectData("/Users/guanlun/Workspace/modules/modules/data/cube.obj"));
     sceneObj.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
     
     vector<SceneObject> sceneObjs;

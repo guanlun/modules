@@ -20,9 +20,14 @@
 
 using namespace std;
 
-class ObjectLoader {
+class ObjectData {
 public:
-    static vector<GLfloat> readObjectFile(const char* filename);
+//    static vector<GLfloat> readObjectFile(const char* filename);
+    ObjectData(const char* filename);
+    
+    vector<GLfloat> vertexPositionData;
+    vector<GLfloat> vertexNormalData;
+    vector<GLfloat> vertexTexCoordData;
 };
 
 #endif /* ObjectLoader_hpp */

@@ -17,11 +17,13 @@
 #include <fstream>
 #include <vector>
 
+#include "ObjectData.hpp"
+
 using namespace std;
 
 class SceneObject {
 public:
-    SceneObject(vector<GLfloat> vertexData);
+    SceneObject(ObjectData objData);
     
     inline glm::mat4 getModelMatrix() const { return modelMatrix; };
     inline GLuint getVertexBuffer() const { return vertexBuffer; };
@@ -33,6 +35,7 @@ public:
 protected:
     int bufferSize;
     GLuint vertexBuffer;
+    GLuint vertexNormalBuffer;
     GLuint shaderProgramID;
     
     glm::mat4 modelMatrix;

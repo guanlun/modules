@@ -15,7 +15,7 @@
 		D95CAACA1FCD221200EECC7D /* SceneObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAC81FCD221200EECC7D /* SceneObject.cpp */; };
 		D95CAACC1FCE589A00EECC7D /* glm.pc in Frameworks */ = {isa = PBXBuildFile; fileRef = D95CAACB1FCE589A00EECC7D /* glm.pc */; };
 		D95CAACF1FCFBCF600EECC7D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAACD1FCFBCF600EECC7D /* Camera.cpp */; };
-		D95CAAD21FD2697D00EECC7D /* ObjectLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAD01FD2697D00EECC7D /* ObjectLoader.cpp */; };
+		D95CAAD21FD2697D00EECC7D /* ObjectData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAD01FD2697D00EECC7D /* ObjectData.cpp */; };
 		D95CAAD51FD5113A00EECC7D /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAD31FD5113A00EECC7D /* Light.cpp */; };
 		D9DF5EB41FC67E3E00D336AF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DF5EB31FC67E3E00D336AF /* main.cpp */; };
 		D9DF5EBC1FC6885A00D336AF /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9DF5EBB1FC6885A00D336AF /* GLUT.framework */; };
@@ -48,8 +48,8 @@
 		D95CAACB1FCE589A00EECC7D /* glm.pc */ = {isa = PBXFileReference; lastKnownFileType = text; name = glm.pc; path = ../../../../usr/local/lib/pkgconfig/glm.pc; sourceTree = "<group>"; };
 		D95CAACD1FCFBCF600EECC7D /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		D95CAACE1FCFBCF600EECC7D /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
-		D95CAAD01FD2697D00EECC7D /* ObjectLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectLoader.cpp; sourceTree = "<group>"; };
-		D95CAAD11FD2697D00EECC7D /* ObjectLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ObjectLoader.hpp; sourceTree = "<group>"; };
+		D95CAAD01FD2697D00EECC7D /* ObjectData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectData.cpp; sourceTree = "<group>"; };
+		D95CAAD11FD2697D00EECC7D /* ObjectData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ObjectData.hpp; sourceTree = "<group>"; };
 		D95CAAD31FD5113A00EECC7D /* Light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
 		D95CAAD41FD5113A00EECC7D /* Light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
 		D9DF5EB01FC67E3E00D336AF /* modules */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = modules; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,8 +105,8 @@
 				D95CAAC91FCD221200EECC7D /* SceneObject.hpp */,
 				D95CAACD1FCFBCF600EECC7D /* Camera.cpp */,
 				D95CAACE1FCFBCF600EECC7D /* Camera.hpp */,
-				D95CAAD01FD2697D00EECC7D /* ObjectLoader.cpp */,
-				D95CAAD11FD2697D00EECC7D /* ObjectLoader.hpp */,
+				D95CAAD01FD2697D00EECC7D /* ObjectData.cpp */,
+				D95CAAD11FD2697D00EECC7D /* ObjectData.hpp */,
 				D95CAAD31FD5113A00EECC7D /* Light.cpp */,
 				D95CAAD41FD5113A00EECC7D /* Light.hpp */,
 			);
@@ -191,7 +191,7 @@
 				D9DF5EB41FC67E3E00D336AF /* main.cpp in Sources */,
 				D95CAACF1FCFBCF600EECC7D /* Camera.cpp in Sources */,
 				D95CAACA1FCD221200EECC7D /* SceneObject.cpp in Sources */,
-				D95CAAD21FD2697D00EECC7D /* ObjectLoader.cpp in Sources */,
+				D95CAAD21FD2697D00EECC7D /* ObjectData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Guanlun Zhao. All rights reserved.
 //
 
-#include "ObjectLoader.hpp"
+#include "ObjectData.hpp"
 
 glm::vec3 parseVector(string vecStr) {
     string segment;
@@ -23,8 +23,8 @@ glm::vec3 parseVector(string vecStr) {
     return vertexPos;
 }
 
-vector<GLfloat> ObjectLoader::readObjectFile(const char* filename) {
-    vector<GLfloat> vertexBufferData;
+ObjectData::ObjectData(const char* filename) {
+//    vector<GLfloat> vertexBufferData;
     
     ifstream objInput(filename);
     
@@ -91,15 +91,16 @@ vector<GLfloat> ObjectLoader::readObjectFile(const char* filename) {
                 
                 glm::vec3 vertexPos = vertexPositions[vIndex];
                 
-                vertexBufferData.push_back(vertexPos[0]);
-                vertexBufferData.push_back(vertexPos[1]);
-                vertexBufferData.push_back(vertexPos[2]);
+                vertexPositionData.push_back(vertexPos[0]);
+                vertexPositionData.push_back(vertexPos[1]);
+                vertexPositionData.push_back(vertexPos[2]);
                 
                 glm::vec3 vertexNormal = vertexNormals[nIndex];
                 
+                vertexNormalData.push_back(vertexNormal[0]);
+                vertexNormalData.push_back(vertexNormal[1]);
+                vertexNormalData.push_back(vertexNormal[2]);
             }
         }
     }
-    
-    return vertexBufferData;
 }

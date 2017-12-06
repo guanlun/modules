@@ -8,17 +8,20 @@
 
 #include "SceneObject.hpp"
 
-
-SceneObject::SceneObject(vector<GLfloat> vertexData) {
+SceneObject::SceneObject(ObjectData objData) {
+    this->modelMatrix = glm::mat4(1.0f);
+    
     glGenBuffers(1, &this->vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);
-    
-    unsigned long vertexDataLength = vertexData.size();
-
-    glBufferData(GL_ARRAY_BUFFER, vertexDataLength * sizeof(GLfloat), vertexData.data(), GL_STATIC_DRAW);
+    unsigned long vertexDataLength = objData.vertexPositionData.size();
+    glBufferData(GL_ARRAY_BUFFER, vertexDataLength * sizeof(GLfloat), objData.vertexPositionData.data(), GL_STATIC_DRAW);
     
     this->bufferSize = (int)vertexDataLength;
-    this->modelMatrix = glm::mat4(1.0f);
+    
+    glGenBuffers(1, &this->vertexNormalBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vertexNormalBuffer);
+    unsigned long vertexNormalDataLength = objData.vertexNormalData.size();
+    glBufferData(GL_ARRAY_BUFFER, vertexNormalDataLength * sizeof(GLfloat), objData.vertexNormalData.data(), GL_STATIC_DRAW);
 }
 
 void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShaderPath) {
