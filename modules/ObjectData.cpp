@@ -23,9 +23,7 @@ glm::vec3 parseVector(string vecStr) {
     return vertexPos;
 }
 
-ObjectData::ObjectData(const char* filename) {
-//    vector<GLfloat> vertexBufferData;
-    
+ObjectData::ObjectData(const char* filename) {    
     ifstream objInput(filename);
     
     string objName;

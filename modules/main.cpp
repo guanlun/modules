@@ -94,7 +94,10 @@ int main( void )
     vector<SceneObject> sceneObjs;
     sceneObjs.push_back(sceneObj);
     
+    glm::vec3 lightPos(6, 8, 10);
+    
     do {
+        glm::mat4 viewMatrix = mainCam.getViewMatrix();
         glm::mat4 viewProjectionMatrix = mainCam.getViewProjectionMatrix();
         
         // Clear the screen
@@ -103,23 +106,31 @@ int main( void )
         for (auto iter = sceneObjs.begin(); iter != sceneObjs.end(); iter++) {
             SceneObject obj = *iter;
             
+            glm::mat4 modelMtx = obj.getModelMatrix();
             glm::mat4 mvp = viewProjectionMatrix * obj.getModelMatrix();
             
             GLuint shaderProgramID = obj.getShaderProgramID();
             GLuint vertexBuffer = obj.getVertexBuffer();
+            GLuint vertexNormalBuffer = obj.getVertexNormalBuffer();
             
             glUseProgram(shaderProgramID);
             
-            GLuint mtxID = glGetUniformLocation(obj.getShaderProgramID(), "MVP");
-            
-            glUniformMatrix4fv(mtxID, 1, GL_FALSE, &mvp[0][0]);
+            glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "MVP"), 1, GL_FALSE, &mvp[0][0]);
+            glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "viewMtx"), 1, GL_FALSE, &viewMatrix[0][0]);
+            glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "modelMtx"), 1, GL_FALSE, &modelMtx[0][0]);
+            glUniform3f(glGetUniformLocation(shaderProgramID, "lightPos"), lightPos[0], lightPos[1], lightPos[2]);
             
             glEnableVertexAttribArray(0);
             glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
             
+            glEnableVertexAttribArray(1);
+            glBindBuffer(GL_ARRAY_BUFFER, vertexNormalBuffer);
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+            
             glDrawArrays(GL_TRIANGLES, 0, obj.getBufferSize());
             glDisableVertexAttribArray(0);
+            glDisableVertexAttribArray(1);
         }
         
         glfwSwapBuffers(window);
