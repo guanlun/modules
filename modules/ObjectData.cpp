@@ -84,20 +84,30 @@ ObjectData::ObjectData(const char* filename) {
                 getline(segmentStream, nStr, '/');
                 
                 int vIndex = atoi(vStr.c_str()) - 1;
-                int tIndex = atoi(tStr.c_str()) - 1;
-                int nIndex = atoi(nStr.c_str()) - 1;
-                
                 glm::vec3 vertexPos = vertexPositions[vIndex];
                 
                 vertexPositionData.push_back(vertexPos[0]);
                 vertexPositionData.push_back(vertexPos[1]);
                 vertexPositionData.push_back(vertexPos[2]);
                 
-                glm::vec3 vertexNormal = vertexNormals[nIndex];
+                if (tStr.length() > 0) {
+                    int tIndex = atoi(tStr.c_str()) - 1;
+                    
+                    glm::vec3 vertexTexCoord = vertexTexCoords[tIndex];
+                    
+                    vertexTexCoordData.push_back(vertexTexCoord[0]);
+                    vertexTexCoordData.push_back(vertexTexCoord[1]);
+                    vertexTexCoordData.push_back(vertexTexCoord[2]);
+                }
                 
-                vertexNormalData.push_back(vertexNormal[0]);
-                vertexNormalData.push_back(vertexNormal[1]);
-                vertexNormalData.push_back(vertexNormal[2]);
+                if (nStr.length() > 0) {
+                    int nIndex = atoi(nStr.c_str()) - 1;
+                    glm::vec3 vertexNormal = vertexNormals[nIndex];
+                    
+                    vertexNormalData.push_back(vertexNormal[0]);
+                    vertexNormalData.push_back(vertexNormal[1]);
+                    vertexNormalData.push_back(vertexNormal[2]);
+                }
             }
         }
     }

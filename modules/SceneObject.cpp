@@ -22,6 +22,15 @@ SceneObject::SceneObject(ObjectData objData) {
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexNormalBuffer);
     unsigned long vertexNormalDataLength = objData.vertexNormalData.size();
     glBufferData(GL_ARRAY_BUFFER, vertexNormalDataLength * sizeof(GLfloat), objData.vertexNormalData.data(), GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &this->vertexTexCoordBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vertexTexCoordBuffer);
+    unsigned long vertexTexCoordDataLength = objData.vertexTexCoordData.size();
+    glBufferData(GL_ARRAY_BUFFER, vertexTexCoordDataLength * sizeof(GLfloat), objData.vertexTexCoordData.data(), GL_STATIC_DRAW);
+}
+
+void SceneObject::addTexture(const char *texFilePath) {
+    
 }
 
 void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShaderPath) {

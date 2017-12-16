@@ -112,6 +112,7 @@ int main( void )
             GLuint shaderProgramID = obj.getShaderProgramID();
             GLuint vertexBuffer = obj.getVertexBuffer();
             GLuint vertexNormalBuffer = obj.getVertexNormalBuffer();
+            GLuint vertexTexCoordBuffer = obj.getVertexTexCoordBuffer();
             
             glUseProgram(shaderProgramID);
             
@@ -127,6 +128,10 @@ int main( void )
             glEnableVertexAttribArray(1);
             glBindBuffer(GL_ARRAY_BUFFER, vertexNormalBuffer);
             glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+            
+            glEnableVertexAttribArray(2);
+            glBindBuffer(GL_ARRAY_BUFFER, vertexTexCoordBuffer);
+            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
             
             glDrawArrays(GL_TRIANGLES, 0, obj.getBufferSize());
             glDisableVertexAttribArray(0);
