@@ -22,6 +22,8 @@ public:
     
     void moveCamera(int direction);
     
+    void rotateCamera(int xDiff, int yDiff);
+    
 protected:
     void updateViewMatrix();
     

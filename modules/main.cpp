@@ -21,10 +21,12 @@ void cursorPosCallback(GLFWwindow* window, double xPos, double yPos) {
         double deltaX = xPos - lastXPos;
         double deltaY = yPos - lastYPos;
         
-        glm::mat4 viewMatrix = mainCam.getViewMatrix();
-        viewMatrix[0][0] += 0.01;
+//        glm::mat4 viewMatrix = mainCam.getViewMatrix();
+//        viewMatrix[0][0] += 0.01;
+//
+//        mainCam.setViewMatrix(viewMatrix);
         
-        mainCam.setViewMatrix(viewMatrix);
+        mainCam.rotateCamera(deltaX, deltaY);
     }
     
     lastXPos = xPos;
