@@ -32,6 +32,7 @@ protected:
     
     glm::vec3 lookAtPos;
     glm::vec3 cameraPos;
+    glm::vec3 upDir;
 };
 
 #endif /* Camera_hpp */
