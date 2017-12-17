@@ -20,5 +20,5 @@ void main()
 
     float cosTheta = clamp(dot(n, l), 0, 1);
 
-    color = vec3(1,0,0) * cosTheta;
+    color = diffuseColor * cosTheta;
 }

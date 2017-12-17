@@ -8,8 +8,8 @@
 
 #include "SceneObject.hpp"
 
-SceneObject::SceneObject(ObjectData objData) {
-    this->modelMatrix = glm::mat4(1.0f);
+SceneObject::SceneObject(ObjectData objData, glm::vec3 pos) {
+    this->modelMatrix = glm::translate(glm::mat4(1.0f), pos);
     
     glGenBuffers(1, &this->vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);

@@ -61,6 +61,8 @@ int main( void )
     glfwSetCursorPosCallback(window, cursorPosCallback);
     glfwSetKeyCallback(window, keyCallback);
     
+//    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    
     // Initialize GLEW
     glewExperimental = true; // Needed for core profile
     if (glewInit() != GLEW_OK) {
@@ -85,11 +87,15 @@ int main( void )
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
     
-    SceneObject sceneObj(ObjectData("/Users/guanlun/Workspace/modules/modules/data/cube.obj"));
-    sceneObj.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
-    
     vector<SceneObject> sceneObjs;
-    sceneObjs.push_back(sceneObj);
+    
+    SceneObject teapot(ObjectData("/Users/guanlun/Workspace/modules/modules/data/teapot.obj"), glm::vec3(2, 0, 0));
+    teapot.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
+    sceneObjs.push_back(teapot);
+    
+    SceneObject cube(ObjectData("/Users/guanlun/Workspace/modules/modules/data/cube.obj"), glm::vec3(-2, 0, 0));
+    cube.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
+    sceneObjs.push_back(cube);
     
     glm::vec3 lightPos(6, 8, 10);
     
@@ -104,6 +110,7 @@ int main( void )
             SceneObject obj = *iter;
             
             glm::mat4 modelMtx = obj.getModelMatrix();
+            glm::mat4 inverseTransposeModelMtx = glm::transpose(glm::inverse(modelMtx));
             glm::mat4 mvp = viewProjectionMatrix * obj.getModelMatrix();
             
             GLuint shaderProgramID = obj.getShaderProgramID();
@@ -116,6 +123,7 @@ int main( void )
             glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "MVP"), 1, GL_FALSE, &mvp[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "viewMtx"), 1, GL_FALSE, &viewMatrix[0][0]);
             glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "modelMtx"), 1, GL_FALSE, &modelMtx[0][0]);
+            glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "invTransModelMtx"), 1, GL_FALSE, &inverseTransposeModelMtx[0][0]);
             glUniform3f(glGetUniformLocation(shaderProgramID, "lightPos"), lightPos[0], lightPos[1], lightPos[2]);
             
             glEnableVertexAttribArray(0);
@@ -126,13 +134,14 @@ int main( void )
             glBindBuffer(GL_ARRAY_BUFFER, vertexNormalBuffer);
             glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
             
-            glEnableVertexAttribArray(2);
-            glBindBuffer(GL_ARRAY_BUFFER, vertexTexCoordBuffer);
-            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+//            glEnableVertexAttribArray(2);
+//            glBindBuffer(GL_ARRAY_BUFFER, vertexTexCoordBuffer);
+//            glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
             
             glDrawArrays(GL_TRIANGLES, 0, obj.getBufferSize());
             glDisableVertexAttribArray(0);
             glDisableVertexAttribArray(1);
+//            glDisableVertexAttribArray(2);
         }
         
         glfwSwapBuffers(window);

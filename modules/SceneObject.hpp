@@ -23,7 +23,7 @@ using namespace std;
 
 class SceneObject {
 public:
-    SceneObject(ObjectData objData);
+    SceneObject(ObjectData objData, glm::vec3 pos);
     
     inline glm::mat4 getModelMatrix() const { return modelMatrix; };
     inline GLuint getVertexBuffer() const { return vertexBuffer; };
