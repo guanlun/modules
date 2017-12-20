@@ -20,6 +20,8 @@ public:
     inline glm::mat4 getViewMatrix() const { return this->viewMtx; };
     inline void setViewMatrix(const glm::mat4 viewMtx) { this->viewMtx = viewMtx; };
     
+    inline glm::vec3 getCameraPos() const { return this->cameraPos; };
+    
     void moveCamera(int direction);
     
     void rotateCamera(int xDiff, int yDiff);

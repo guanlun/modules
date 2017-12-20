@@ -33,6 +33,10 @@ void SceneObject::addTexture(const char *texFilePath) {
     
 }
 
+float SceneObject::intersectVector(glm::vec3 vec) const {
+    return 0;
+}
+
 void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShaderPath) {
     // Create the shaders
     GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);

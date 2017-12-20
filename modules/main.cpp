@@ -1,20 +1,62 @@
-// Include standard headers
-
-// Include GLEW
 #include <GL/glew.h>
-
-// Include GLFW
 #include <GLFW/glfw3.h>
-GLFWwindow* window;
 
 #include "SceneObject.hpp"
 #include "Camera.hpp"
 #include "ObjectData.hpp"
 
-Camera mainCam(glm::vec3(10, 10, 10));
+GLFWwindow* window;
+
+const int WINDOW_WIDTH = 1024;
+const int WINDOW_HEIGHT = 768;
+
+//Camera mainCam(glm::vec3(10, 10, 10));
+Camera mainCam(glm::vec3(0, 0, 0));
 
 double lastXPos = -1;
 double lastYPos = -1;
+
+void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+        float screenSpaceY = -((float)lastYPos / WINDOW_HEIGHT - 0.5) * 2;
+        float screenSpaceX = ((float)lastXPos / WINDOW_WIDTH - 0.5) * 2 * ((float)WINDOW_WIDTH / WINDOW_HEIGHT);
+        
+        const float projRatio = tan(45.0 / 2 / 180 * 3.1416);
+        float cameraSpaceY = screenSpaceY * projRatio;
+        float cameraSpaceX = screenSpaceX * projRatio;
+        
+        glm::vec4 cameraSpaceRayVec(cameraSpaceX, cameraSpaceY, -1, 1);
+        glm::mat4 inverseViewMtx = glm::inverse(mainCam.getViewMatrix());
+        inverseViewMtx[3][0] = .0f;
+        inverseViewMtx[3][1] = .0f;
+        inverseViewMtx[3][2] = .0f;
+        
+        cout << "inverse view matrix: " << endl;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                cout << inverseViewMtx[j][i] << "\t";
+            }
+            
+            cout << endl;
+        }
+        cout << endl;
+        
+        glm::vec3 worldSpaceRayVec(inverseViewMtx * cameraSpaceRayVec);
+        
+        glm::vec3 cameraPos = mainCam.getCameraPos();
+        float camZ = cameraPos[2];
+        float rayZ = worldSpaceRayVec[2];
+        
+        float rayT = (-4 - camZ) / rayZ;
+        
+        glm::vec3 intersectionPoint = cameraPos + worldSpaceRayVec * rayT;
+        
+        cout << cameraSpaceRayVec[0] << "\t" << cameraSpaceRayVec[1] << "\t" << cameraSpaceRayVec[2] << endl;
+        cout << worldSpaceRayVec[0] << "\t" << worldSpaceRayVec[1] << "\t" << worldSpaceRayVec[2] << endl;
+        cout << intersectionPoint[0] << "\t" << intersectionPoint[1] << "\t" << intersectionPoint[2] << endl;
+        cout << endl;
+    }
+}
 
 void cursorPosCallback(GLFWwindow* window, double xPos, double yPos) {
     if (lastXPos != -1 || lastYPos != -1) {
@@ -32,12 +74,10 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
     mainCam.moveCamera(key);
 }
 
-int main( void )
-{
+int main() {
     // Initialise GLFW
-    if( !glfwInit() )
-    {
-        fprintf( stderr, "Failed to initialize GLFW\n" );
+    if(!glfwInit()) {
+        fprintf(stderr, "Failed to initialize GLFW\n");
         getchar();
         return -1;
     }
@@ -47,17 +87,18 @@ int main( void )
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Modules", NULL, NULL);
     
-    // Open a window and create its OpenGL context
-    window = glfwCreateWindow( 1024, 768, "Tutorial 02 - Red triangle", NULL, NULL);
-    if( window == NULL ){
-        fprintf( stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n" );
+    if (window == NULL) {
+        fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
         getchar();
         glfwTerminate();
         return -1;
     }
+    
     glfwMakeContextCurrent(window);
     
+    glfwSetMouseButtonCallback(window, mouseButtonCallback);
     glfwSetCursorPosCallback(window, cursorPosCallback);
     glfwSetKeyCallback(window, keyCallback);
     
@@ -89,11 +130,11 @@ int main( void )
     
     vector<SceneObject> sceneObjs;
     
-    SceneObject teapot(ObjectData("/Users/guanlun/Workspace/modules/modules/data/teapot.obj"), glm::vec3(2, 0, 0));
-    teapot.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
-    sceneObjs.push_back(teapot);
+//    SceneObject teapot(ObjectData("/Users/guanlun/Workspace/modules/modules/data/teapot.obj"), glm::vec3(2, 0, 0));
+//    teapot.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
+//    sceneObjs.push_back(teapot);
     
-    SceneObject cube(ObjectData("/Users/guanlun/Workspace/modules/modules/data/cube.obj"), glm::vec3(-2, 0, 0));
+    SceneObject cube(ObjectData("/Users/guanlun/Workspace/modules/modules/data/cube.obj"), glm::vec3(0, 0, -5));
     cube.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
     sceneObjs.push_back(cube);
     

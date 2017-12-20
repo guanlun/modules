@@ -32,6 +32,8 @@ public:
     inline GLuint getShaderProgramID() const { return shaderProgramID; };
     inline int getBufferSize() const { return bufferSize; };
     
+    float intersectVector(glm::vec3 vec) const;
+    
     void addTexture(const char* texFilePath);
     
     void loadShaders(const char* vertShaderPath, const char* fragShaderPath);
