@@ -10,8 +10,9 @@ GLFWwindow* window;
 const int WINDOW_WIDTH = 1024;
 const int WINDOW_HEIGHT = 768;
 
-//Camera mainCam(glm::vec3(10, 10, 10));
-Camera mainCam(glm::vec3(0, 0, 0));
+Camera mainCam(glm::vec3(10, 10, 10));
+//Camera mainCam(glm::vec3(0, 0, 10));
+vector<SceneObject> sceneObjs;
 
 double lastXPos = -1;
 double lastYPos = -1;
@@ -27,34 +28,51 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
         
         glm::vec4 cameraSpaceRayVec(cameraSpaceX, cameraSpaceY, -1, 1);
         glm::mat4 inverseViewMtx = glm::inverse(mainCam.getViewMatrix());
+        
+        // ignore the translation performed by the world -> camera space transformation
         inverseViewMtx[3][0] = .0f;
         inverseViewMtx[3][1] = .0f;
         inverseViewMtx[3][2] = .0f;
         
-        cout << "inverse view matrix: " << endl;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                cout << inverseViewMtx[j][i] << "\t";
-            }
-            
-            cout << endl;
-        }
-        cout << endl;
-        
         glm::vec3 worldSpaceRayVec(inverseViewMtx * cameraSpaceRayVec);
         
         glm::vec3 cameraPos = mainCam.getCameraPos();
-        float camZ = cameraPos[2];
-        float rayZ = worldSpaceRayVec[2];
         
-        float rayT = (-4 - camZ) / rayZ;
+        float minT = INT_MAX;
+        SceneObject* intersectedObj = NULL;
         
-        glm::vec3 intersectionPoint = cameraPos + worldSpaceRayVec * rayT;
+        for (auto &obj : sceneObjs) {
+            glm::mat4 inverseModelMtx = glm::inverse(obj.getModelMatrix());
+            glm::vec3 modelSpaceRayStartPoint(inverseModelMtx * glm::vec4(cameraPos, 1));
+            
+            inverseModelMtx[3][0] = .0f;
+            inverseModelMtx[3][1] = .0f;
+            inverseModelMtx[3][2] = .0f;
+            glm::vec3 modelSpaceRayDir(inverseModelMtx * glm::vec4(worldSpaceRayVec, 1));
+            
+            float t = obj.intersectRay(modelSpaceRayStartPoint, modelSpaceRayDir);
+            
+            if (t > 0 && t < minT) {
+                minT = t;
+                intersectedObj = &obj;
+            }
+        }
         
-        cout << cameraSpaceRayVec[0] << "\t" << cameraSpaceRayVec[1] << "\t" << cameraSpaceRayVec[2] << endl;
-        cout << worldSpaceRayVec[0] << "\t" << worldSpaceRayVec[1] << "\t" << worldSpaceRayVec[2] << endl;
-        cout << intersectionPoint[0] << "\t" << intersectionPoint[1] << "\t" << intersectionPoint[2] << endl;
-        cout << endl;
+        if (intersectedObj) {
+            cout << intersectedObj->getBufferSize() << endl;
+        }
+        
+//        float camZ = cameraPos[2];
+//        float rayZ = worldSpaceRayVec[2];
+//
+//        float rayT = (-4 - camZ) / rayZ;
+//
+//        glm::vec3 intersectionPoint = cameraPos + worldSpaceRayVec * rayT;
+        
+//        cout << cameraSpaceRayVec[0] << "\t" << cameraSpaceRayVec[1] << "\t" << cameraSpaceRayVec[2] << endl;
+//        cout << worldSpaceRayVec[0] << "\t" << worldSpaceRayVec[1] << "\t" << worldSpaceRayVec[2] << endl;
+//        cout << intersectionPoint[0] << "\t" << intersectionPoint[1] << "\t" << intersectionPoint[2] << endl;
+//        cout << endl;
     }
 }
 
@@ -128,13 +146,11 @@ int main() {
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
     
-    vector<SceneObject> sceneObjs;
+    SceneObject teapot(ObjectData("/Users/guanlun/Workspace/modules/modules/data/teapot.obj"), glm::vec3(2, 0, 0));
+    teapot.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
+    sceneObjs.push_back(teapot);
     
-//    SceneObject teapot(ObjectData("/Users/guanlun/Workspace/modules/modules/data/teapot.obj"), glm::vec3(2, 0, 0));
-//    teapot.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
-//    sceneObjs.push_back(teapot);
-    
-    SceneObject cube(ObjectData("/Users/guanlun/Workspace/modules/modules/data/cube.obj"), glm::vec3(0, 0, -5));
+    SceneObject cube(ObjectData("/Users/guanlun/Workspace/modules/modules/data/cube.obj"), glm::vec3(0, 0, -1));
     cube.loadShaders("/Users/guanlun/Workspace/modules/modules/SimpleVertexShader.vertexshader", "/Users/guanlun/Workspace/modules/modules/SimpleFragmentShader.fragmentshader");
     sceneObjs.push_back(cube);
     

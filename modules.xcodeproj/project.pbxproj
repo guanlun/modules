@@ -17,6 +17,7 @@
 		D95CAACF1FCFBCF600EECC7D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAACD1FCFBCF600EECC7D /* Camera.cpp */; };
 		D95CAAD21FD2697D00EECC7D /* ObjectData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAD01FD2697D00EECC7D /* ObjectData.cpp */; };
 		D95CAAD51FD5113A00EECC7D /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAD31FD5113A00EECC7D /* Light.cpp */; };
+		D9DABEE91FED7422008749F2 /* MeshTriangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DABEE71FED7422008749F2 /* MeshTriangle.cpp */; };
 		D9DF5EB41FC67E3E00D336AF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DF5EB31FC67E3E00D336AF /* main.cpp */; };
 		D9DF5EBC1FC6885A00D336AF /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9DF5EBB1FC6885A00D336AF /* GLUT.framework */; };
 		D9DF5EBE1FC6885E00D336AF /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9DF5EBD1FC6885E00D336AF /* OpenGL.framework */; };
@@ -52,6 +53,8 @@
 		D95CAAD11FD2697D00EECC7D /* ObjectData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ObjectData.hpp; sourceTree = "<group>"; };
 		D95CAAD31FD5113A00EECC7D /* Light.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
 		D95CAAD41FD5113A00EECC7D /* Light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
+		D9DABEE71FED7422008749F2 /* MeshTriangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshTriangle.cpp; sourceTree = "<group>"; };
+		D9DABEE81FED7422008749F2 /* MeshTriangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshTriangle.hpp; sourceTree = "<group>"; };
 		D9DF5EB01FC67E3E00D336AF /* modules */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = modules; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9DF5EB31FC67E3E00D336AF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D9DF5EBB1FC6885A00D336AF /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -109,6 +112,8 @@
 				D95CAAD11FD2697D00EECC7D /* ObjectData.hpp */,
 				D95CAAD31FD5113A00EECC7D /* Light.cpp */,
 				D95CAAD41FD5113A00EECC7D /* Light.hpp */,
+				D9DABEE71FED7422008749F2 /* MeshTriangle.cpp */,
+				D9DABEE81FED7422008749F2 /* MeshTriangle.hpp */,
 			);
 			path = modules;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 			files = (
 				D95CAAD51FD5113A00EECC7D /* Light.cpp in Sources */,
 				D9DF5EB41FC67E3E00D336AF /* main.cpp in Sources */,
+				D9DABEE91FED7422008749F2 /* MeshTriangle.cpp in Sources */,
 				D95CAACF1FCFBCF600EECC7D /* Camera.cpp in Sources */,
 				D95CAACA1FCD221200EECC7D /* SceneObject.cpp in Sources */,
 				D95CAAD21FD2697D00EECC7D /* ObjectData.cpp in Sources */,

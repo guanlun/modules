@@ -35,15 +35,15 @@ void Camera::updateViewMatrix() {
     
 //    this->viewMtx = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, -1));
     
-    cout << "view matrix: " << endl;
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            cout << this->viewMtx[j][i] << "\t";
-        }
-
-        cout << endl;
-    }
-    cout << endl;
+//    cout << "view matrix: " << endl;
+//    for (int i = 0; i < 4; i++) {
+//        for (int j = 0; j < 4; j++) {
+//            cout << this->viewMtx[j][i] << "\t";
+//        }
+//
+//        cout << endl;
+//    }
+//    cout << endl;
 }
 
 void Camera::moveCamera(int direction) {

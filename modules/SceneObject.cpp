@@ -11,10 +11,20 @@
 SceneObject::SceneObject(ObjectData objData, glm::vec3 pos) {
     this->modelMatrix = glm::translate(glm::mat4(1.0f), pos);
     
+    const vector<GLfloat>& vertexPositions = objData.vertexPositionData;
+    for (int i = 0; i < vertexPositions.size(); i += 9) {
+//        this->vertices.push_back(MeshTriangle(glm::vec3(vertexPositions[i], vertexPositions[i + 1], vertexPositions[i + 2])));
+        glm::vec3 v1(vertexPositions[i], vertexPositions[i + 1], vertexPositions[i + 2]);
+        glm::vec3 v2(vertexPositions[i + 3], vertexPositions[i + 4], vertexPositions[i + 5]);
+        glm::vec3 v3(vertexPositions[i + 6], vertexPositions[i + 7], vertexPositions[i + 8]);
+        
+        this->triangles.push_back(MeshTriangle(v1, v2, v3));
+    }
+    
     glGenBuffers(1, &this->vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuffer);
-    unsigned long vertexDataLength = objData.vertexPositionData.size();
-    glBufferData(GL_ARRAY_BUFFER, vertexDataLength * sizeof(GLfloat), objData.vertexPositionData.data(), GL_STATIC_DRAW);
+    unsigned long vertexDataLength = vertexPositions.size();
+    glBufferData(GL_ARRAY_BUFFER, vertexDataLength * sizeof(GLfloat), vertexPositions.data(), GL_STATIC_DRAW);
     
     this->bufferSize = (int)vertexDataLength;
     
@@ -33,8 +43,24 @@ void SceneObject::addTexture(const char *texFilePath) {
     
 }
 
-float SceneObject::intersectVector(glm::vec3 vec) const {
-    return 0;
+float SceneObject::intersectRay(glm::vec3 rayStartPos, glm::vec3 rayDir) const {
+    bool intersected = false;
+    float minT = INT_MAX;
+    
+    for (auto &meshTriangle : this->triangles) {
+        float t = meshTriangle.intersectRay(rayStartPos, rayDir);
+        
+        if (t > 0.00001 && t < minT) {
+            minT = t;
+            intersected = true;
+        }
+    }
+    
+    if (intersected) {
+        return minT;
+    } else {
+        return -1.f;
+    }
 }
 
 void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShaderPath) {

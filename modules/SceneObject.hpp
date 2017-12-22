@@ -18,6 +18,7 @@
 #include <vector>
 
 #include "ObjectData.hpp"
+#include "MeshTriangle.hpp"
 
 using namespace std;
 
@@ -32,7 +33,7 @@ public:
     inline GLuint getShaderProgramID() const { return shaderProgramID; };
     inline int getBufferSize() const { return bufferSize; };
     
-    float intersectVector(glm::vec3 vec) const;
+    float intersectRay(glm::vec3 rayStartPos, glm::vec3 rayDir) const;
     
     void addTexture(const char* texFilePath);
     
@@ -46,6 +47,8 @@ protected:
     GLuint shaderProgramID;
     
     glm::mat4 modelMatrix;
+    
+    vector<MeshTriangle> triangles;
 };
 
 #endif /* SceneObject_hpp */
