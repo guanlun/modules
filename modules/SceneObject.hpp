@@ -34,9 +34,7 @@ public:
     inline int getBufferSize() const { return bufferSize; };
     
     float intersectRay(glm::vec3 rayStartPos, glm::vec3 rayDir) const;
-    
     void addTexture(const char* texFilePath);
-    
     void loadShaders(const char* vertShaderPath, const char* fragShaderPath);
     
 protected:
