@@ -20,6 +20,7 @@
 #include "ObjectData.hpp"
 #include "MeshTriangle.hpp"
 #include "Shader.hpp"
+#include "Material.hpp"
 
 using namespace std;
 
@@ -36,8 +37,9 @@ public:
     
     float intersectRay(glm::vec3 rayStartPos, glm::vec3 rayDir) const;
     void addTexture(string texFilePath);
-    void loadShaders(string vertShaderPath, string fragShaderPath);
     void setShaders(const Shader& vertexShader, const Shader& fragmentShader);
+    inline void setMaterial(Material* mat) { this->material = mat; cout << this->material->diffuseColor[0] << endl; };
+    inline const Material* getMaterial() const { cout << this->material->diffuseColor[0] << endl; return this->material; };
     
 protected:
     int bufferSize;
@@ -45,6 +47,8 @@ protected:
     GLuint vertexNormalBuffer;
     GLuint vertexTexCoordBuffer;
     GLuint shaderProgramID;
+    
+    Material* material;
     
     glm::mat4 modelMatrix;
     

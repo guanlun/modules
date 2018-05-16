@@ -31,6 +31,7 @@ void SceneRenderer::render(const GameState* currGameState) {
     
     for (auto iter = currGameState->sceneObjects.begin(); iter != currGameState->sceneObjects.end(); iter++) {
         SceneObject obj = *iter;
+        const Material* objMaterial = obj.getMaterial();
         
         glm::mat4 modelMtx = obj.getModelMatrix();
         glm::mat4 inverseTransposeModelMtx = glm::transpose(glm::inverse(modelMtx));
@@ -48,6 +49,7 @@ void SceneRenderer::render(const GameState* currGameState) {
         glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "modelMtx"), 1, GL_FALSE, &modelMtx[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "invTransModelMtx"), 1, GL_FALSE, &inverseTransposeModelMtx[0][0]);
         glUniform3f(glGetUniformLocation(shaderProgramID, "lightPos"), currGameState->lightPos[0], currGameState->lightPos[1], currGameState->lightPos[2]);
+        glUniform3f(glGetUniformLocation(shaderProgramID, "diffuseColor"), objMaterial->diffuseColor[0], objMaterial->diffuseColor[1], objMaterial->diffuseColor[2]);
         
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);

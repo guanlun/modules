@@ -10,6 +10,7 @@
 #define GameState_hpp
 
 #include "SceneObject.hpp"
+#include "Material.hpp"
 #include "Shader.hpp"
 #include "Camera.hpp"
 

@@ -16,11 +16,19 @@ GameState::GameState() : lightPos(glm::vec3(6, 8, 10)), mainCam(Camera(glm::vec3
     Shader simpleVertexShader("vertex", SHADER_DIR + "SimpleVertexShader");
     Shader simpleFragmentShader("fragment", SHADER_DIR + "SimpleFragmentShader");
     
+    float red[] = {1.0, 0.2, 0.2};
+    Material* redMat = new Material(red);
+    
+    float green[] = {0.2, 1.0, 0.2};
+    Material* greenMat = new Material(green);
+    
     SceneObject teapot(ObjectData(OBJ_DIR + "teapot.obj"), glm::vec3(2, 0, 0));
     teapot.setShaders(simpleVertexShader, simpleFragmentShader);
+    teapot.setMaterial(redMat);
     this->sceneObjects.push_back(teapot);
     
     SceneObject cube(ObjectData(OBJ_DIR + "cube.obj"), glm::vec3(0, 0, -1));
     cube.setShaders(simpleVertexShader, simpleFragmentShader);
+    cube.setMaterial(greenMat);
     this->sceneObjects.push_back(cube);
 }

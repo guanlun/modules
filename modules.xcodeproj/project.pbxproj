@@ -18,6 +18,7 @@
 		D95CAAD21FD2697D00EECC7D /* ObjectData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAD01FD2697D00EECC7D /* ObjectData.cpp */; };
 		D95CAAD51FD5113A00EECC7D /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAD31FD5113A00EECC7D /* Light.cpp */; };
 		D9ACF17120AC873C00CFE9EC /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9ACF16F20AC873C00CFE9EC /* Shader.cpp */; };
+		D9ACF17420ACC59300CFE9EC /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9ACF17220ACC59300CFE9EC /* Material.cpp */; };
 		D9DABEE91FED7422008749F2 /* MeshTriangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DABEE71FED7422008749F2 /* MeshTriangle.cpp */; };
 		D9DABEEC1FEECD58008749F2 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DABEEA1FEECD58008749F2 /* Application.cpp */; };
 		D9DABEEF1FEECD9D008749F2 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DABEED1FEECD9D008749F2 /* GameState.cpp */; };
@@ -59,6 +60,8 @@
 		D95CAAD41FD5113A00EECC7D /* Light.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
 		D9ACF16F20AC873C00CFE9EC /* Shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
 		D9ACF17020AC873C00CFE9EC /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		D9ACF17220ACC59300CFE9EC /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
+		D9ACF17320ACC59300CFE9EC /* Material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Material.hpp; sourceTree = "<group>"; };
 		D9DABEE71FED7422008749F2 /* MeshTriangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshTriangle.cpp; sourceTree = "<group>"; };
 		D9DABEE81FED7422008749F2 /* MeshTriangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshTriangle.hpp; sourceTree = "<group>"; };
 		D9DABEEA1FEECD58008749F2 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
@@ -133,6 +136,8 @@
 				D9DABEEE1FEECD9D008749F2 /* GameState.hpp */,
 				D9ACF16F20AC873C00CFE9EC /* Shader.cpp */,
 				D9ACF17020AC873C00CFE9EC /* Shader.hpp */,
+				D9ACF17220ACC59300CFE9EC /* Material.cpp */,
+				D9ACF17320ACC59300CFE9EC /* Material.hpp */,
 			);
 			path = modules;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 				D95CAAD51FD5113A00EECC7D /* Light.cpp in Sources */,
 				D9DF5EB41FC67E3E00D336AF /* main.cpp in Sources */,
 				D9DABEE91FED7422008749F2 /* MeshTriangle.cpp in Sources */,
+				D9ACF17420ACC59300CFE9EC /* Material.cpp in Sources */,
 				D9ACF17120AC873C00CFE9EC /* Shader.cpp in Sources */,
 				D9DABEEF1FEECD9D008749F2 /* GameState.cpp in Sources */,
 				D95CAACF1FCFBCF600EECC7D /* Camera.cpp in Sources */,
