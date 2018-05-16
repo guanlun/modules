@@ -19,6 +19,7 @@
 
 #include "ObjectData.hpp"
 #include "MeshTriangle.hpp"
+#include "Shader.hpp"
 
 using namespace std;
 
@@ -34,8 +35,9 @@ public:
     inline int getBufferSize() const { return bufferSize; };
     
     float intersectRay(glm::vec3 rayStartPos, glm::vec3 rayDir) const;
-    void addTexture(const char* texFilePath);
-    void loadShaders(const char* vertShaderPath, const char* fragShaderPath);
+    void addTexture(string texFilePath);
+    void loadShaders(string vertShaderPath, string fragShaderPath);
+    void setShaders(const Shader& vertexShader, const Shader& fragmentShader);
     
 protected:
     int bufferSize;

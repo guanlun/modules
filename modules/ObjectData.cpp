@@ -23,8 +23,8 @@ glm::vec3 parseVector(string vecStr) {
     return vertexPos;
 }
 
-ObjectData::ObjectData(const char* filename) {    
-    ifstream objInput(filename);
+ObjectData::ObjectData(string filename) {    
+    ifstream objInput(filename.c_str());
     
     string objName;
     

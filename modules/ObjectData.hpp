@@ -23,7 +23,7 @@ using namespace std;
 class ObjectData {
 public:
 //    static vector<GLfloat> readObjectFile(const char* filename);
-    ObjectData(const char* filename);
+    ObjectData(string filename);
     
     vector<GLfloat> vertexPositionData;
     vector<GLfloat> vertexNormalData;

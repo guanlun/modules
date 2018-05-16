@@ -39,7 +39,7 @@ SceneObject::SceneObject(ObjectData objData, glm::vec3 pos) {
     glBufferData(GL_ARRAY_BUFFER, vertexTexCoordDataLength * sizeof(GLfloat), objData.vertexTexCoordData.data(), GL_STATIC_DRAW);
 }
 
-void SceneObject::addTexture(const char *texFilePath) {
+void SceneObject::addTexture(string texFilePath) {
     
 }
 
@@ -63,7 +63,38 @@ float SceneObject::intersectRay(glm::vec3 rayStartPos, glm::vec3 rayDir) const {
     }
 }
 
-void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShaderPath) {
+void SceneObject::setShaders(const Shader& vertexShader, const Shader& fragmentShader) {
+    printf("Linking program\n");
+    this->shaderProgramID = glCreateProgram();
+    
+    GLuint vertexShaderID = vertexShader.getShaderID();
+    GLuint fragmentShaderID = fragmentShader.getShaderID();
+    
+    glAttachShader(this->shaderProgramID, vertexShaderID);
+    glAttachShader(this->shaderProgramID, fragmentShaderID);
+    glLinkProgram(this->shaderProgramID);
+    
+    GLint result = GL_FALSE;
+    int infoLogLength;
+    
+    // Check the program
+    glGetProgramiv(this->shaderProgramID, GL_LINK_STATUS, &result);
+    glGetProgramiv(this->shaderProgramID, GL_INFO_LOG_LENGTH, &infoLogLength);
+    
+    if (infoLogLength > 0) {
+        std::vector<char> programErrorMessage(infoLogLength + 1);
+        glGetProgramInfoLog(this->shaderProgramID, infoLogLength, NULL, &programErrorMessage[0]);
+        printf("%s\n", &programErrorMessage[0]);
+    }
+    
+    glDetachShader(this->shaderProgramID, vertexShaderID);
+    glDetachShader(this->shaderProgramID, fragmentShaderID);
+//
+//    glDeleteShader(vertexShaderID);
+//    glDeleteShader(fragmentShaderID);
+}
+
+void SceneObject::loadShaders(string vertShaderPath, string fragShaderPath) {
     // Create the shaders
     GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
     GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -77,7 +108,7 @@ void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShader
             VertexShaderCode += "\n" + Line;
         VertexShaderStream.close();
     } else {
-        printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertShaderPath);
+        printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n", vertShaderPath.c_str());
         getchar();
         return;
     }
@@ -97,7 +128,7 @@ void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShader
     
     
     // Compile Vertex Shader
-    printf("Compiling shader : %s\n", vertShaderPath);
+    printf("Compiling shader : %s\n", vertShaderPath.c_str());
     char const * VertexSourcePointer = VertexShaderCode.c_str();
     glShaderSource(vertexShaderID, 1, &VertexSourcePointer , NULL);
     glCompileShader(vertexShaderID);
@@ -112,7 +143,7 @@ void SceneObject::loadShaders(const char* vertShaderPath, const char* fragShader
     }
     
     // Compile Fragment Shader
-    printf("Compiling shader : %s\n", fragShaderPath);
+    printf("Compiling shader : %s\n", fragShaderPath.c_str());
     char const * FragmentSourcePointer = FragmentShaderCode.c_str();
     glShaderSource(fragmentShaderID, 1, &FragmentSourcePointer , NULL);
     glCompileShader(fragmentShaderID);
