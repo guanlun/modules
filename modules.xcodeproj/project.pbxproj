@@ -19,6 +19,8 @@
 		D95CAAD51FD5113A00EECC7D /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D95CAAD31FD5113A00EECC7D /* Light.cpp */; };
 		D9ACF17120AC873C00CFE9EC /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9ACF16F20AC873C00CFE9EC /* Shader.cpp */; };
 		D9ACF17420ACC59300CFE9EC /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9ACF17220ACC59300CFE9EC /* Material.cpp */; };
+		D9ACF17720ACD4E500CFE9EC /* ObjectGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9ACF17520ACD4E500CFE9EC /* ObjectGroup.cpp */; };
+		D9ACF17A20ACD5AE00CFE9EC /* StateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9ACF17820ACD5AE00CFE9EC /* StateManager.cpp */; };
 		D9DABEE91FED7422008749F2 /* MeshTriangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DABEE71FED7422008749F2 /* MeshTriangle.cpp */; };
 		D9DABEEC1FEECD58008749F2 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DABEEA1FEECD58008749F2 /* Application.cpp */; };
 		D9DABEEF1FEECD9D008749F2 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D9DABEED1FEECD9D008749F2 /* GameState.cpp */; };
@@ -62,6 +64,10 @@
 		D9ACF17020AC873C00CFE9EC /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
 		D9ACF17220ACC59300CFE9EC /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		D9ACF17320ACC59300CFE9EC /* Material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Material.hpp; sourceTree = "<group>"; };
+		D9ACF17520ACD4E500CFE9EC /* ObjectGroup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectGroup.cpp; sourceTree = "<group>"; };
+		D9ACF17620ACD4E500CFE9EC /* ObjectGroup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ObjectGroup.hpp; sourceTree = "<group>"; };
+		D9ACF17820ACD5AE00CFE9EC /* StateManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateManager.cpp; sourceTree = "<group>"; };
+		D9ACF17920ACD5AE00CFE9EC /* StateManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateManager.hpp; sourceTree = "<group>"; };
 		D9DABEE71FED7422008749F2 /* MeshTriangle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshTriangle.cpp; sourceTree = "<group>"; };
 		D9DABEE81FED7422008749F2 /* MeshTriangle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshTriangle.hpp; sourceTree = "<group>"; };
 		D9DABEEA1FEECD58008749F2 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
@@ -138,6 +144,10 @@
 				D9ACF17020AC873C00CFE9EC /* Shader.hpp */,
 				D9ACF17220ACC59300CFE9EC /* Material.cpp */,
 				D9ACF17320ACC59300CFE9EC /* Material.hpp */,
+				D9ACF17520ACD4E500CFE9EC /* ObjectGroup.cpp */,
+				D9ACF17620ACD4E500CFE9EC /* ObjectGroup.hpp */,
+				D9ACF17820ACD5AE00CFE9EC /* StateManager.cpp */,
+				D9ACF17920ACD5AE00CFE9EC /* StateManager.hpp */,
 			);
 			path = modules;
 			sourceTree = "<group>";
@@ -227,12 +237,14 @@
 			files = (
 				D9DABEF31FEF1E25008749F2 /* SceneRenderer.cpp in Sources */,
 				D95CAAD51FD5113A00EECC7D /* Light.cpp in Sources */,
+				D9ACF17A20ACD5AE00CFE9EC /* StateManager.cpp in Sources */,
 				D9DF5EB41FC67E3E00D336AF /* main.cpp in Sources */,
 				D9DABEE91FED7422008749F2 /* MeshTriangle.cpp in Sources */,
 				D9ACF17420ACC59300CFE9EC /* Material.cpp in Sources */,
 				D9ACF17120AC873C00CFE9EC /* Shader.cpp in Sources */,
 				D9DABEEF1FEECD9D008749F2 /* GameState.cpp in Sources */,
 				D95CAACF1FCFBCF600EECC7D /* Camera.cpp in Sources */,
+				D9ACF17720ACD4E500CFE9EC /* ObjectGroup.cpp in Sources */,
 				D9DABEEC1FEECD58008749F2 /* Application.cpp in Sources */,
 				D95CAACA1FCD221200EECC7D /* SceneObject.cpp in Sources */,
 				D95CAAD21FD2697D00EECC7D /* ObjectData.cpp in Sources */,

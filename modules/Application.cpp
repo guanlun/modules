@@ -130,6 +130,7 @@ bool Application::initWindow() {
 
 void Application::start() {
     do {
+        StateManager::updateState(this->gameState);
         this->sceneRenderer->render(this->gameState);
         
         glfwSwapBuffers(window);

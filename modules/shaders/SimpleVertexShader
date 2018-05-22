@@ -14,12 +14,11 @@ uniform mat4 viewMtx;
 uniform mat4 modelMtx;
 uniform mat4 invTransModelMtx;
 uniform vec3 lightPos;
+uniform vec3 camaraPos;
 
 void main(){
-
     gl_Position = MVP * vec4(vertexPosition_modelspace, 1);
 
     vertexPosition = (modelMtx * vec4(vertexPosition_modelspace, 1)).xyz;
     vertexNormal = (invTransModelMtx * vec4(vertexNormal_modelspace, 1)).xyz;
-
 }

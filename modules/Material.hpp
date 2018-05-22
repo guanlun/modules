@@ -14,8 +14,9 @@ using namespace std;
 
 class Material {
 public:
-    Material(float diffuseColor[]);
+    Material(float diffuseColor[], float specularColor[]);
     float* diffuseColor;
+    float* specularColor;
 };
 
 #endif /* Material_hpp */

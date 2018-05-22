@@ -23,14 +23,17 @@ SceneRenderer::SceneRenderer() {
 }
 
 void SceneRenderer::render(const GameState* currGameState) {
-    glm::mat4 viewMatrix = currGameState->mainCam.getViewMatrix();
-    glm::mat4 viewProjectionMatrix = currGameState->mainCam.getViewProjectionMatrix();
+    const Camera& mainCam = currGameState->mainCam;
+    
+    const glm::mat4& viewMatrix = mainCam.getViewMatrix();
+    const glm::mat4& viewProjectionMatrix = mainCam.getViewProjectionMatrix();
+    const glm::vec3& cameraPos = mainCam.getCameraPos();
     
     // Clear the screen
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     for (auto iter = currGameState->sceneObjects.begin(); iter != currGameState->sceneObjects.end(); iter++) {
-        SceneObject obj = *iter;
+        const SceneObject& obj = *iter;
         const Material* objMaterial = obj.getMaterial();
         
         glm::mat4 modelMtx = obj.getModelMatrix();
@@ -50,6 +53,8 @@ void SceneRenderer::render(const GameState* currGameState) {
         glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "invTransModelMtx"), 1, GL_FALSE, &inverseTransposeModelMtx[0][0]);
         glUniform3f(glGetUniformLocation(shaderProgramID, "lightPos"), currGameState->lightPos[0], currGameState->lightPos[1], currGameState->lightPos[2]);
         glUniform3f(glGetUniformLocation(shaderProgramID, "diffuseColor"), objMaterial->diffuseColor[0], objMaterial->diffuseColor[1], objMaterial->diffuseColor[2]);
+        glUniform3f(glGetUniformLocation(shaderProgramID, "specularColor"), objMaterial->specularColor[0], objMaterial->specularColor[1], objMaterial->specularColor[2]);
+        glUniform3f(glGetUniformLocation(shaderProgramID, "cameraPos"), cameraPos[0], cameraPos[1], cameraPos[2]);
         
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);

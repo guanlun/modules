@@ -9,6 +9,7 @@
 #ifndef GameState_hpp
 #define GameState_hpp
 
+#include "ObjectGroup.hpp"
 #include "SceneObject.hpp"
 #include "Material.hpp"
 #include "Shader.hpp"

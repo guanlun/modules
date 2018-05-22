@@ -10,6 +10,7 @@
 #define Application_hpp
 
 #include "GameState.hpp"
+#include "StateManager.hpp"
 #include "Camera.hpp"
 #include "SceneRenderer.hpp"
 

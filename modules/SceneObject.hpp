@@ -38,8 +38,10 @@ public:
     float intersectRay(glm::vec3 rayStartPos, glm::vec3 rayDir) const;
     void addTexture(string texFilePath);
     void setShaders(const Shader& vertexShader, const Shader& fragmentShader);
-    inline void setMaterial(Material* mat) { this->material = mat; cout << this->material->diffuseColor[0] << endl; };
-    inline const Material* getMaterial() const { cout << this->material->diffuseColor[0] << endl; return this->material; };
+    inline void setMaterial(Material* mat) { this->material = mat; };
+    inline const Material* getMaterial() const { return this->material; };
+    
+    void update();
     
 protected:
     int bufferSize;
@@ -50,6 +52,7 @@ protected:
     
     Material* material;
     
+    glm::vec3 position;
     glm::mat4 modelMatrix;
     
     vector<MeshTriangle> triangles;

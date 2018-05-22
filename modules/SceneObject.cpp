@@ -9,6 +9,7 @@
 #include "SceneObject.hpp"
 
 SceneObject::SceneObject(ObjectData objData, glm::vec3 pos) {
+    this->position = pos;
     this->modelMatrix = glm::translate(glm::mat4(1.0f), pos);
     
     const vector<GLfloat>& vertexPositions = objData.vertexPositionData;
@@ -94,3 +95,7 @@ void SceneObject::setShaders(const Shader& vertexShader, const Shader& fragmentS
 //    glDeleteShader(fragmentShaderID);
 }
 
+void SceneObject::update() {
+    this->position[0] += 0.02;
+    this->modelMatrix = glm::translate(glm::mat4(1.0f), this->position);
+}
